@@ -8,6 +8,10 @@ import Jobs from "./src/pages/Jobs";
 import JobDetail from "./src/pages/JobDetail";
 import FavoritedJobs from "./src/pages/FavoritedJobs";
 
+import FavoriteProvider from './src/context/FavoriteProvider';
+
+
+
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -27,11 +31,13 @@ function JobStack() {
 
 export default function App() {
   return (
+    <FavoriteProvider>
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={JobStack} />
         <Drawer.Screen name="Favorited" component={FavoritedJobs} />
       </Drawer.Navigator>
     </NavigationContainer>
+    </FavoriteProvider>
   );
 }

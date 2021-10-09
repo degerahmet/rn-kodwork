@@ -10,6 +10,11 @@ import Button from "../../components/Button";
 
 import RenderHtml from 'react-native-render-html';
 
+import { useDispatch } from "react-redux";
+
+
+
+
 const URL = 'https://www.themuse.com/api/public/jobs';
 
 export default function JobDetail({route}) {
@@ -20,9 +25,12 @@ export default function JobDetail({route}) {
   const source = {
     html: data.contents
   };
-
-
   const { width } = useWindowDimensions();
+
+  const dispatch = useDispatch();
+  const handleFavorite = job => {
+    dispatch({type: 'ADD_FAVORITE', payload: {job}});
+  };
 
 
   if (loading) {
@@ -65,7 +73,7 @@ export default function JobDetail({route}) {
       
       <View style={styles.footer_container}>
           <Button icon="send" text="Submit"/>
-          <Button icon="heart" text="Favorite Job"/>
+          <Button icon="heart" text="Favorite Job" onPress={() => handleFavorite(data)}/>
 
       </View>
 
